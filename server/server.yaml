@@ -56,7 +56,7 @@ Resources:
           sudo apt-get install apache2 -y
           cd /var/www/html
           sudo aws s3 cp s3://845034361554/index.html .
-          sudo aws s3 cp s3://845034361554/Blank diagram.png .
+          sudo aws s3 cp s3://845034361554/Blankdiagram.png .
 
           sudo systemctl start apache2.service  
       # Operating System to be used is Ubuntu 18 
