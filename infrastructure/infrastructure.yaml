@@ -219,14 +219,26 @@ Outputs:
     Export: 
       Name: !Sub ${Environment}-Priv-RT2
 
-  PublicSubnets:
-    Description: A list of the public subnets
-    Value: !Join [ ",", [ !Ref PublicSubnet1, !Ref PublicSubnet2 ]]
+  PublicSubnet1:
+    Description: A reference to the public subnet in the 1st Availability Zone
+    Value: !Ref PublicSubnet1
     Export:
-      Name: !Sub ${Environment}-PUB-NETS
+      Name: !Sub ${Environment}-PUB1-SN
 
-  PrivateSubnets:
-    Description: A list of the private subnets
-    Value: !Join [ ",", [ !Ref PrivateSubnet1, !Ref PrivateSubnet2 ]]
+  PublicSubnet2: 
+    Description: A reference to the public subnet in the 2nd Availability Zone
+    Value: !Ref PublicSubnet2
     Export:
-      Name: !Sub ${Environment}-PRIV-NETS
+      Name: !Sub ${Environment}-PUB2-SN
+
+  PrivateSubnet1:
+    Description: A reference to the private subnet in the 1st Availability Zone
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: !Sub ${Environment}-PRI1-SN
+
+  PrivateSubnet2: 
+    Description: A reference to the private subnet in the 2nd Availability Zone
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: !Sub ${Environment}-PRI2-SN 
