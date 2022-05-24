@@ -1,0 +1,47 @@
+Parameters:
+  Environment: 
+    Description: The environment name that will be prefixed to resources names 
+    Type: String
+
+Resources:
+  IAMS3Role: 
+    Type: AWS::IAM::Role 
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+            - Effect: Allow
+              Principal:
+                  Service:
+                      - ec2.amazonaws.com
+              Action:
+                  - sts:AssumeRole
+      Path: "/"
+  
+  S3BucketsReadOnly:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: S3BucketsPolicy
+      PolicyDocument:
+        Statement:
+            - Effect: Allow
+              Action:
+                  - s3:*
+              Resource: "*"
+      Roles: 
+        - Ref: IAMS3Role
+
+  ProfileWithRole:
+      Type: AWS::IAM::InstanceProfile
+      Properties:
+          Path: "/"
+          Roles:
+              - Ref: IAMS3Role
+
+Outputs:
+  
+  ProfileWithS3Role: 
+      Description: a reference to the profile with role assigned
+      Value: !Ref ProfileWithRole
+      Export: 
+        Name: !Sub ${Environment}-PRO
